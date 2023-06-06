@@ -92,6 +92,9 @@ function resetGame() {
     gameData.style.borderBottomLeftRadius  = "5px";
     gameData.style.borderBottomRightRadius  = "5px";
     roundDataElement.style.display = "none";
+
+    isFull = false;
+    playerWon = false;
 }
 
 // Utility Functions
@@ -113,7 +116,7 @@ const playerFactory = (playerName, playerSymbol) => {
 
 function checkForWinner(player) {
 
-
+    var playerWon = false;
     var parElements = document.querySelectorAll('[data-index]>p');
 
     /*
@@ -125,11 +128,12 @@ function checkForWinner(player) {
     if(game.gameBoard[0] == player.playerSymbol 
         && game.gameBoard[1] == player.playerSymbol 
         && game.gameBoard[2] == player.playerSymbol) {
-            console.log(`${player.playerName} won!`);
 
             parElements[0].style.color = WINNING_TEXT_COLOR;
             parElements[1].style.color = WINNING_TEXT_COLOR;
             parElements[2].style.color = WINNING_TEXT_COLOR;
+
+            playerWon = true;
         }
 
     /*
@@ -141,11 +145,12 @@ function checkForWinner(player) {
     else if(game.gameBoard[0] == player.playerSymbol 
         && game.gameBoard[3] == player.playerSymbol 
         && game.gameBoard[6] == player.playerSymbol) {
-            console.log(`${player.playerName} won!`);
 
             parElements[0].style.color = WINNING_TEXT_COLOR;
             parElements[3].style.color = WINNING_TEXT_COLOR;
             parElements[6].style.color = WINNING_TEXT_COLOR;
+
+            playerWon = true;
         }
        
     /*
@@ -157,11 +162,12 @@ function checkForWinner(player) {
     else if(game.gameBoard[2] == player.playerSymbol 
         && game.gameBoard[5] == player.playerSymbol 
         && game.gameBoard[8] == player.playerSymbol) {
-            console.log(`${player.playerName} won!`);
 
             parElements[2].style.color = WINNING_TEXT_COLOR;
             parElements[5].style.color = WINNING_TEXT_COLOR;
             parElements[8].style.color = WINNING_TEXT_COLOR;
+
+            playerWon = true;
         }
 
     /*
@@ -173,13 +179,12 @@ function checkForWinner(player) {
     else if(game.gameBoard[6] == player.playerSymbol 
         && game.gameBoard[7] == player.playerSymbol 
         && game.gameBoard[8] == player.playerSymbol) {
-            console.log(`${player.playerName} won!`);
-
-
 
             parElements[6].style.color = WINNING_TEXT_COLOR;
             parElements[7].style.color = WINNING_TEXT_COLOR;
             parElements[8].style.color = WINNING_TEXT_COLOR;
+
+            playerWon = true;
         }
 
     /*
@@ -191,11 +196,12 @@ function checkForWinner(player) {
     else if(game.gameBoard[0] == player.playerSymbol 
         && game.gameBoard[4] == player.playerSymbol 
         && game.gameBoard[8] == player.playerSymbol) {
-            console.log(`${player.playerName} won!`);
 
             parElements[0].style.color = WINNING_TEXT_COLOR;
             parElements[4].style.color = WINNING_TEXT_COLOR;
             parElements[8].style.color = WINNING_TEXT_COLOR;
+
+            playerWon = true;
         }
 
     /*
@@ -207,11 +213,12 @@ function checkForWinner(player) {
     else if(game.gameBoard[2] == player.playerSymbol 
         && game.gameBoard[4] == player.playerSymbol 
         && game.gameBoard[6] == player.playerSymbol) {
-            console.log(`${player.playerName} won!`);
 
             parElements[2].style.color = WINNING_TEXT_COLOR;
             parElements[4].style.color = WINNING_TEXT_COLOR;
             parElements[6].style.color = WINNING_TEXT_COLOR;
+
+            playerWon = true;
         }
 
     /*
@@ -223,11 +230,12 @@ function checkForWinner(player) {
     else if(game.gameBoard[1] == player.playerSymbol 
         && game.gameBoard[4] == player.playerSymbol 
         && game.gameBoard[7] == player.playerSymbol) {
-            console.log(`${player.playerName} won!`);
 
             parElements[1].style.color = WINNING_TEXT_COLOR;
             parElements[4].style.color = WINNING_TEXT_COLOR;
             parElements[7].style.color = WINNING_TEXT_COLOR;
+
+            playerWon = true;
         }
 
     /*
@@ -239,11 +247,12 @@ function checkForWinner(player) {
     else if(game.gameBoard[3] == player.playerSymbol 
         && game.gameBoard[4] == player.playerSymbol 
         && game.gameBoard[5] == player.playerSymbol) {
-            console.log(`${player.playerName} won!`);
 
             parElements[3].style.color = WINNING_TEXT_COLOR;
             parElements[4].style.color = WINNING_TEXT_COLOR;
             parElements[5].style.color = WINNING_TEXT_COLOR;
+
+            playerWon = true;
     }
 
     // Check for draw
@@ -257,7 +266,22 @@ function checkForWinner(player) {
             }
         }
 
-        if(isFull) { console.log("DRAW"); }
+        if(isFull) { alert("DRAW"); }
+    }
+
+
+    if(playerWon) {
+        setTimeout(() => {
+            alert(`${player.playerName} won!`);
+            resetGame();
+        }, 50);    
+    }
+    
+    if(isFull) {
+        setTimeout(() => {
+            alert("DRAW!");
+            resetGame();
+        }, 50);
     }
 }
 
