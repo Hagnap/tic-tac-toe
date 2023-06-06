@@ -1,3 +1,17 @@
+@font-face {
+    font-family: neon;
+    src: url(fonts/BurgerJointNeon.ttf);
+}
+
+* {
+    --GAMEBOARD_COLOR: #41658A;
+    --MAIN_BACKGROUND_COLOR: #EFEFF0;
+}
+
+body {
+    background-color: var(--MAIN_BACKGROUND_COLOR);
+}
+
 .container {
     display: grid;
     grid-template-columns: 1fr 4fr 1fr;
@@ -15,6 +29,42 @@ h1,
 
 h1 {
     grid-row: 1 /2;
+
+    /* Neon Effect Reference: https://www.youtube.com/watch?v=BDO_xNCw6wU&ab_channel=RedStapler*/
+    /* The larger the offset, the darker the blur/shadow is */
+
+    /* Light Off/On Animation Reference: https://www.youtube.com/watch?v=I5KTgvL6QB4&ab_channel=Divinector */
+    font-family: neon;
+    color: #DB222A;
+    text-shadow: 
+    0 0 0 transparent,
+    .1vw 0vw .25vw #ffd8d8, .2vw 0vw .25vw #ffd8d8, .4vw 0vw .25vw #ffd8d8, 
+
+    .1vw 0vw   0vw #f25757, .2vw 0vw   0vw #f25757, .4vw 0vw   0vw #f25757,
+    .1vw 0vw  .1vw #f25757, .2vw 0vw  .1vw #f25757, .4vw 0vw  .1vw #f25757,
+    .1vw 0vw   2vw #f25757, .2vw 0vw   2vw #f25757, .4vw 0vw   2vw #f25757, 
+  
+    .1vw 0vw   1vw #DB222A, .2vw 0vw   1vw #DB222A, .4vw 0vw   5vw #DB222A;
+
+    animation: animate 3s infinite alternate;
+}
+
+@keyframes animate {
+    40% {
+        opacity: 1;
+    }
+    42% {
+        opacity: 0.8;
+    }
+    43% {
+        opacity: 1;
+    }
+    45% {
+        opacity: 0.3;
+    }
+    46% {
+        opacity: 1;
+    }
 }
 
 #game-data {
@@ -22,12 +72,15 @@ h1 {
 }
 
 #game-board {
+
+    background-color: var(--GAMEBOARD_COLOR);
+    padding: 8px;
+    border-radius: 5px;
+
     grid-row: 3 / 4;   
 
     display: grid;
-
     justify-content: center;
-
     /* Have grid implicitly assign position of the grid-items*/
     grid-template-columns: repeat(3, minmax(50px, 150px));
     grid-template-rows: repeat(3, minmax(75px, 150px));
