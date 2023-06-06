@@ -1,7 +1,16 @@
 let roundCounter = 1;
 
 //DOM ELEMENTS
+const currentPlayer = document.querySelector("#current-player");
+const currentRound = document.querySelector("#round-number");
+const userInfoFormElement = document.querySelector("#user-info-form");
+const roundDataElement = document.querySelector("#round-data");
 const gameBoardElement = document.querySelector("#game-board");
+
+
+const resetBtn = document.querySelector("#reset-button");
+resetBtn.addEventListener("click", (event) => { resetGame(); })
+
 const gridItems = document.querySelectorAll(".grid-item");
 gridItems.forEach(item => {
     item.addEventListener("click", (event) => {
@@ -16,6 +25,9 @@ submitBtn.addEventListener("click", (event) => {
     document.querySelector("form").reset();
 
     displayGame();
+    userInfoFormElement.style.display = "none";
+    roundDataElement.style.display = "block";
+
 });
 
 // Make Game-Board a Module
@@ -31,6 +43,7 @@ const game = (() => {
     // Functions
     const updatePosition = (item) => {
 
+        var player = roundCounter % 2 != 0 ? playerOne : playerTwo
         var index = item.getAttribute("data-index");
         var p;
 
@@ -43,8 +56,12 @@ const game = (() => {
         }
         else {
             p = item.getElementsByTagName("p")[0];
-            p.textContent = roundCounter % 2 != 0 ? playerOne.playerSymbol : playerTwo.playerSymbol;
-            game.gameBoard[index] = roundCounter % 2 != 0 ? playerOne.playerSymbol : playerTwo.playerSymbol;
+            p.textContent =  player.playerSymbol;
+            game.gameBoard[index] = player.playerSymbol;
+
+            currentRound.textContent = `Round: ${roundCounter}`;
+            currentPlayer.textContent = `Current Player: ${player.playerName}`;
+
             roundCounter++;
         }
 
@@ -54,9 +71,28 @@ const game = (() => {
     return { gameBoard, updatePosition };
 })();
 
+function resetGame() {
+
+    var parElements = document.querySelectorAll('[data-index]>p');
+    for(let i = 0; i < game.gameBoard.length; i++) {
+        game.gameBoard[i] = "";
+        parElements[i].textContent = "";
+    }
+
+    console.table(game.gameBoard);
+
+    roundCounter = 0;
+
+    gameBoardElement.style.display = "none";
+    userInfoFormElement.style.display = "block";
+    roundDataElement.style.display = "none";
+}
 
 // Utility Functions
 function displayGame() {
+    // Game will ALWAYS start with player one
+    currentPlayer.textContent = `Current Player: ${playerOne.playerName}`;
+    currentRound.textContent = `Round: ${roundCounter}`;
     gameBoardElement.style.display = "grid";
 }
 
