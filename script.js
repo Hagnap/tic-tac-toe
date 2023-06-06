@@ -1,4 +1,6 @@
 let roundCounter = 1;
+const WINNING_TEXT_COLOR = "#329F5B";
+const NORMAL_TEXT_COLOR = "#07070A";
 
 //DOM ELEMENTS
 const currentPlayer = document.querySelector("#current-player");
@@ -55,13 +57,15 @@ const game = (() => {
             console.log("ERROR: INVALID SELECTION");
         }
         else {
-            roundCounter++;
             player = roundCounter % 2 != 0 ? playerOne : playerTwo
+            roundCounter++;
+            
             p = item.getElementsByTagName("p")[0];
             p.textContent =  player.playerSymbol;
             game.gameBoard[index] = player.playerSymbol;
             checkForWinner(player);
 
+            player = roundCounter % 2 != 0 ? playerOne : playerTwo
             currentRound.textContent = `Round: ${roundCounter}`;
             currentPlayer.textContent = player.playerName;   
         }
@@ -76,6 +80,7 @@ function resetGame() {
     for(let i = 0; i < game.gameBoard.length; i++) {
         game.gameBoard[i] = "";
         parElements[i].textContent = "";
+        parElements[i].style.color = NORMAL_TEXT_COLOR;
     }
 
     console.table(game.gameBoard);
@@ -108,6 +113,9 @@ const playerFactory = (playerName, playerSymbol) => {
 
 function checkForWinner(player) {
 
+
+    var parElements = document.querySelectorAll('[data-index]>p');
+
     /*
         Win Scenario 1:
             x   x   x
@@ -118,6 +126,10 @@ function checkForWinner(player) {
         && game.gameBoard[1] == player.playerSymbol 
         && game.gameBoard[2] == player.playerSymbol) {
             console.log(`${player.playerName} won!`);
+
+            parElements[0].style.color = WINNING_TEXT_COLOR;
+            parElements[1].style.color = WINNING_TEXT_COLOR;
+            parElements[2].style.color = WINNING_TEXT_COLOR;
         }
 
     /*
@@ -130,6 +142,10 @@ function checkForWinner(player) {
         && game.gameBoard[3] == player.playerSymbol 
         && game.gameBoard[6] == player.playerSymbol) {
             console.log(`${player.playerName} won!`);
+
+            parElements[0].style.color = WINNING_TEXT_COLOR;
+            parElements[3].style.color = WINNING_TEXT_COLOR;
+            parElements[6].style.color = WINNING_TEXT_COLOR;
         }
        
     /*
@@ -142,6 +158,10 @@ function checkForWinner(player) {
         && game.gameBoard[5] == player.playerSymbol 
         && game.gameBoard[8] == player.playerSymbol) {
             console.log(`${player.playerName} won!`);
+
+            parElements[2].style.color = WINNING_TEXT_COLOR;
+            parElements[5].style.color = WINNING_TEXT_COLOR;
+            parElements[8].style.color = WINNING_TEXT_COLOR;
         }
 
     /*
@@ -154,6 +174,12 @@ function checkForWinner(player) {
         && game.gameBoard[7] == player.playerSymbol 
         && game.gameBoard[8] == player.playerSymbol) {
             console.log(`${player.playerName} won!`);
+
+
+
+            parElements[6].style.color = WINNING_TEXT_COLOR;
+            parElements[7].style.color = WINNING_TEXT_COLOR;
+            parElements[8].style.color = WINNING_TEXT_COLOR;
         }
 
     /*
@@ -166,6 +192,10 @@ function checkForWinner(player) {
         && game.gameBoard[4] == player.playerSymbol 
         && game.gameBoard[8] == player.playerSymbol) {
             console.log(`${player.playerName} won!`);
+
+            parElements[0].style.color = WINNING_TEXT_COLOR;
+            parElements[4].style.color = WINNING_TEXT_COLOR;
+            parElements[8].style.color = WINNING_TEXT_COLOR;
         }
 
     /*
@@ -178,6 +208,10 @@ function checkForWinner(player) {
         && game.gameBoard[4] == player.playerSymbol 
         && game.gameBoard[6] == player.playerSymbol) {
             console.log(`${player.playerName} won!`);
+
+            parElements[2].style.color = WINNING_TEXT_COLOR;
+            parElements[4].style.color = WINNING_TEXT_COLOR;
+            parElements[6].style.color = WINNING_TEXT_COLOR;
         }
 
     /*
@@ -190,6 +224,10 @@ function checkForWinner(player) {
         && game.gameBoard[4] == player.playerSymbol 
         && game.gameBoard[7] == player.playerSymbol) {
             console.log(`${player.playerName} won!`);
+
+            parElements[1].style.color = WINNING_TEXT_COLOR;
+            parElements[4].style.color = WINNING_TEXT_COLOR;
+            parElements[7].style.color = WINNING_TEXT_COLOR;
         }
 
     /*
@@ -202,6 +240,10 @@ function checkForWinner(player) {
         && game.gameBoard[4] == player.playerSymbol 
         && game.gameBoard[5] == player.playerSymbol) {
             console.log(`${player.playerName} won!`);
+
+            parElements[3].style.color = WINNING_TEXT_COLOR;
+            parElements[4].style.color = WINNING_TEXT_COLOR;
+            parElements[5].style.color = WINNING_TEXT_COLOR;
     }
 
     // Check for draw
