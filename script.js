@@ -1,10 +1,19 @@
 //DOM ELEMENTS
-
+const gameBoardElement = document.querySelector("#game-board");
 const gridItems = document.querySelectorAll(".grid-item");
 gridItems.forEach(item => {
     item.addEventListener("click", (event) => {
         game.updatePosition(item);
     });
+});
+
+const submitBtn = document.querySelector("#form-button");
+submitBtn.addEventListener("click", (event) => {
+    playerOne.playerName = document.querySelector("#player-one-name").value ? document.querySelector("#player-one-name").value : "player-one";
+    playerTwo.playerName = document.querySelector("#player-two-name").value ? document.querySelector("#player-two-name").value : "player-two";
+    document.querySelector("form").reset();
+
+    displayGame();
 });
 
 // Make Game-Board a Module
@@ -43,6 +52,10 @@ const game = (() => {
 })();
 
 
+// Utility Functions
+function displayGame() {
+    gameBoardElement.style.display = "grid";
+}
 
 
 // Make a Player Factory

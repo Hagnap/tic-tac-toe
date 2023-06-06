@@ -24,6 +24,38 @@ body {
 }
 
 
+#user-info-form {
+
+    outline: 1px solid var(--MAIN_BACKGROUND_COLOR);
+    padding: 8px;
+    border-radius: 5px;
+}
+
+.input-div {
+
+    margin: 8px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+#form-button {
+
+    width: 60px;
+    
+}
+
+#round-data {
+    display: none;
+}
+
+
+
 h1,
 #game-data,
 #game-board {
@@ -78,6 +110,11 @@ h1 {
 
 #game-data {
 
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     border-top-right-radius: 5px;
     border-top-left-radius: 5px;
 
@@ -97,7 +134,8 @@ h1 {
 
     grid-row: 3 / 4;   
 
-    display: grid;
+    display: none;
+    /* display: grid; */
     justify-content: center;
     /* Have grid implicitly assign position of the grid-items*/
     grid-template-columns: repeat(3, minmax(50px, 150px));
