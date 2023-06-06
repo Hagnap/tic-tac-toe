@@ -1,0 +1,71 @@
+.container {
+    display: grid;
+    grid-template-columns: 1fr 4fr 1fr;
+    grid-template-rows: 1fr 1fr 4fr;
+    justify-items: center;
+    align-items: center;
+}
+
+
+h1,
+#game-data,
+#game-board {
+    grid-column: 2 / 3;
+}
+
+h1 {
+    grid-row: 1 /2;
+}
+
+#game-data {
+    grid-row: 2 / 3;
+}
+
+#game-board {
+    grid-row: 3 / 4;   
+
+    display: grid;
+
+    justify-content: center;
+
+    /* Have grid implicitly assign position of the grid-items*/
+    grid-template-columns: repeat(3, minmax(50px, 150px));
+    grid-template-rows: repeat(3, minmax(75px, 150px));
+}
+
+.grid-item {
+    border: 1px solid black;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.grid-item > p {
+    font-size: 48px;
+    
+}
+
+#grid-item-1,
+#grid-item-2,
+#grid-item-3 {
+    border-top: none;
+}
+
+#grid-item-7,
+#grid-item-8,
+#grid-item-9 {
+    border-bottom: none;
+}
+
+#grid-item-1,
+#grid-item-4,
+#grid-item-7 {
+    border-left: none;
+}
+
+#grid-item-3,
+#grid-item-6,
+#grid-item-9 {
+    border-right: none;
+}
