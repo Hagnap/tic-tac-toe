@@ -43,6 +43,7 @@ const game = (() => {
     // Functions
     const updatePosition = (item) => {
 
+        
         var player = roundCounter % 2 != 0 ? playerOne : playerTwo
         var index = item.getAttribute("data-index");
         var p;
@@ -55,14 +56,16 @@ const game = (() => {
             console.log("ERROR: INVALID SELECTION");
         }
         else {
+            roundCounter++;
             p = item.getElementsByTagName("p")[0];
             p.textContent =  player.playerSymbol;
             game.gameBoard[index] = player.playerSymbol;
+            checkForWinner(player);
 
             currentRound.textContent = `Round: ${roundCounter}`;
-            currentPlayer.textContent = `Current Player: ${player.playerName}`;
+            currentPlayer.textContent = player.playerName;
 
-            roundCounter++;
+            
         }
 
 
@@ -81,7 +84,7 @@ function resetGame() {
 
     console.table(game.gameBoard);
 
-    roundCounter = 0;
+    roundCounter = 1;
 
     gameBoardElement.style.display = "none";
     userInfoFormElement.style.display = "block";
@@ -91,7 +94,7 @@ function resetGame() {
 // Utility Functions
 function displayGame() {
     // Game will ALWAYS start with player one
-    currentPlayer.textContent = `Current Player: ${playerOne.playerName}`;
+    currentPlayer.textContent = `${playerOne.playerName}`;
     currentRound.textContent = `Round: ${roundCounter}`;
     gameBoardElement.style.display = "grid";
 }
@@ -103,6 +106,114 @@ const playerFactory = (playerName, playerSymbol) => {
     return { playerName, playerSymbol };
 }
 
+function checkForWinner(player) {
+
+    /*
+        Win Scenario 1:
+            x   x   x
+            -   -   -
+            -   -   -   
+    */
+    if(game.gameBoard[0] == player.playerSymbol 
+        && game.gameBoard[1] == player.playerSymbol 
+        && game.gameBoard[2] == player.playerSymbol) {
+            console.log(`${player.playerName} won!`);
+        }
+
+    /*
+        Win Scenario 2:
+            x   -   -
+            x   -   -
+            x   -   -   
+    */
+    else if(game.gameBoard[0] == player.playerSymbol 
+        && game.gameBoard[3] == player.playerSymbol 
+        && game.gameBoard[6] == player.playerSymbol) {
+            console.log(`${player.playerName} won!`);
+        }
+       
+    /*
+        Win Scenario 3:
+            -   -   x
+            -   -   x
+            -   -   x   
+    */
+    else if(game.gameBoard[2] == player.playerSymbol 
+        && game.gameBoard[5] == player.playerSymbol 
+        && game.gameBoard[8] == player.playerSymbol) {
+            console.log(`${player.playerName} won!`);
+        }
+
+    /*
+        Win Scenario 4:
+            -   -   -
+            -   -   -
+            x   x   x   
+    */
+    else if(game.gameBoard[6] == player.playerSymbol 
+        && game.gameBoard[7] == player.playerSymbol 
+        && game.gameBoard[8] == player.playerSymbol) {
+            console.log(`${player.playerName} won!`);
+        }
+
+    /*
+        Win Scenario 5:
+            x   -   -
+            -   x   -
+            -   -   x   
+    */
+    else if(game.gameBoard[0] == player.playerSymbol 
+        && game.gameBoard[4] == player.playerSymbol 
+        && game.gameBoard[8] == player.playerSymbol) {
+            console.log(`${player.playerName} won!`);
+        }
+
+    /*
+        Win Scenario 6:
+            -   -   x
+            -   x  -
+            x   -   -   
+    */
+    else if(game.gameBoard[2] == player.playerSymbol 
+        && game.gameBoard[4] == player.playerSymbol 
+        && game.gameBoard[6] == player.playerSymbol) {
+            console.log(`${player.playerName} won!`);
+        }
+
+    /*
+        Win Scenario 7:
+            -   x   -
+            -   x   -
+            -   x   -   
+    */
+    else if(game.gameBoard[1] == player.playerSymbol 
+        && game.gameBoard[4] == player.playerSymbol 
+        && game.gameBoard[7] == player.playerSymbol) {
+            console.log(`${player.playerName} won!`);
+        }
+
+    /*
+        Win Scenario 8:
+            -   -   -
+            x   x   x
+            -   -   -   
+    */
+    else if(game.gameBoard[3] == player.playerSymbol 
+        && game.gameBoard[4] == player.playerSymbol 
+        && game.gameBoard[5] == player.playerSymbol) {
+            console.log(`${player.playerName} won!`);
+    }
+
+    // Check for draw
+    else {
+        var isFull = false;
+        game.gameBoard.forEach(item => {
+            isFull = item === "" ? false : true;
+        })
+
+        if(isFull) { console.log("DRAW"); }
+    }
+}
 
 
 // Test code
