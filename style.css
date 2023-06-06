@@ -31,6 +31,13 @@ body {
     border-radius: 5px;
 }
 
+#player-name {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+
+}
+
 .input-div {
 
     margin: 8px;
@@ -44,17 +51,48 @@ form {
     
 }
 
-#form-button {
 
-    width: 60px;
-    
+
+#text-data {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 #round-data {
     display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 300px;
+
+    padding: 4px;
+    outline: 1px solid var(--MAIN_BACKGROUND_COLOR);
+    border-radius: 5px;
+}
+
+#reset-button {
+    margin-bottom: 8px;
+}
+
+button {
+    background-color: var(--SECONDARY_BACKGROUND_COLOR);
+    color: var(--MAIN_BACKGROUND_COLOR);
+    border-radius: 5px;
+    border: 1px solid var(--MAIN_BACKGROUND_COLOR);
+
+    height: 30px;
+    width: auto;
+    font-size: 16px;
+    text-align: center;
 }
 
 
+button:hover {
+    color: var(--SECONDARY_BACKGROUND_COLOR);
+    background-color: var(--MAIN_BACKGROUND_COLOR);
+}
 
 h1,
 #game-data,

@@ -6,7 +6,7 @@ const currentRound = document.querySelector("#round-number");
 const userInfoFormElement = document.querySelector("#user-info-form");
 const roundDataElement = document.querySelector("#round-data");
 const gameBoardElement = document.querySelector("#game-board");
-
+const gameData = document.querySelector("#game-data");
 
 const resetBtn = document.querySelector("#reset-button");
 resetBtn.addEventListener("click", (event) => { resetGame(); })
@@ -26,7 +26,7 @@ submitBtn.addEventListener("click", (event) => {
 
     displayGame();
     userInfoFormElement.style.display = "none";
-    roundDataElement.style.display = "block";
+    roundDataElement.style.display = "flex";
 
 });
 
@@ -43,9 +43,8 @@ const game = (() => {
     // Functions
     const updatePosition = (item) => {
 
-        
-        var player = roundCounter % 2 != 0 ? playerOne : playerTwo
         var index = item.getAttribute("data-index");
+        var player;
         var p;
 
         // Validate input with if and else-if
@@ -57,18 +56,15 @@ const game = (() => {
         }
         else {
             roundCounter++;
+            player = roundCounter % 2 != 0 ? playerOne : playerTwo
             p = item.getElementsByTagName("p")[0];
             p.textContent =  player.playerSymbol;
             game.gameBoard[index] = player.playerSymbol;
             checkForWinner(player);
 
             currentRound.textContent = `Round: ${roundCounter}`;
-            currentPlayer.textContent = player.playerName;
-
-            
+            currentPlayer.textContent = player.playerName;   
         }
-
-
     }
         
     return { gameBoard, updatePosition };
@@ -88,6 +84,8 @@ function resetGame() {
 
     gameBoardElement.style.display = "none";
     userInfoFormElement.style.display = "block";
+    gameData.style.borderBottomLeftRadius  = "5px";
+    gameData.style.borderBottomRightRadius  = "5px";
     roundDataElement.style.display = "none";
 }
 
@@ -97,6 +95,8 @@ function displayGame() {
     currentPlayer.textContent = `${playerOne.playerName}`;
     currentRound.textContent = `Round: ${roundCounter}`;
     gameBoardElement.style.display = "grid";
+    gameData.style.borderBottomLeftRadius  = "0px";
+    gameData.style.borderBottomRightRadius  = "0px";
 }
 
 
