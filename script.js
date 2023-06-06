@@ -207,9 +207,13 @@ function checkForWinner(player) {
     // Check for draw
     else {
         var isFull = false;
-        game.gameBoard.forEach(item => {
-            isFull = item === "" ? false : true;
-        })
+
+        for(let i = 0; i < game.gameBoard.length; i++) {
+            isFull = game.gameBoard[i] === "" ? false : true;
+            if(!isFull) { 
+                break; 
+            }
+        }
 
         if(isFull) { console.log("DRAW"); }
     }
@@ -217,6 +221,6 @@ function checkForWinner(player) {
 
 
 // Test code
-
+resetGame();
 let playerOne = playerFactory("", "X");
 let playerTwo = playerFactory("", "O");
