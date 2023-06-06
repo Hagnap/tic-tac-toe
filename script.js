@@ -1,3 +1,5 @@
+let roundCounter = 1;
+
 //DOM ELEMENTS
 const gameBoardElement = document.querySelector("#game-board");
 const gridItems = document.querySelectorAll(".grid-item");
@@ -41,8 +43,9 @@ const game = (() => {
         }
         else {
             p = item.getElementsByTagName("p")[0];
-            p.textContent = "X";
-            game.gameBoard[index] = "X"
+            p.textContent = roundCounter % 2 != 0 ? playerOne.playerSymbol : playerTwo.playerSymbol;
+            game.gameBoard[index] = roundCounter % 2 != 0 ? playerOne.playerSymbol : playerTwo.playerSymbol;
+            roundCounter++;
         }
 
 
