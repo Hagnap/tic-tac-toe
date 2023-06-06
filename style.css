@@ -83,12 +83,12 @@ h1 {
 
     grid-row: 2 / 3;
     height: 100%;
-    width: 70%;
+    width: 50%;
 }
 
 #game-board {
     
-    width: 70%;
+    width: 50%;
     height: 100%;
 
     border-radius: 5px;
