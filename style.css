@@ -4,9 +4,12 @@
 }
 
 * {
+    /* Color Palette Tool: https://coolors.co/07070a-41658a-efeff0-329f5b-db222a*/
     --GAMEBOARD_COLOR: #41658A;
     --MAIN_BACKGROUND_COLOR: #07070A;
     --SECONDARY_BACKGROUND_COLOR: #EFEFF0;
+    --WINNIG_COLOR: #329F5B;
+    --MAIN_NEON_RED: #DB222A;
 }
 
 body {
@@ -109,7 +112,7 @@ h1 {
 
     /* Light Off/On Animation Reference: https://www.youtube.com/watch?v=I5KTgvL6QB4&ab_channel=Divinector */
     font-family: neon;
-    color: #DB222A;
+    color: var(--MAIN_NEON_RED);
     text-shadow: 
     0 0 0 transparent,
     .1vw 0vw .25vw #FF6B6C, .2vw 0vw .25vw #FF6B6C, .4vw 0vw .25vw #FF6B6C, 
@@ -118,7 +121,7 @@ h1 {
     .1vw 0vw  .1vw #f25757, .2vw 0vw  .1vw #f25757, .4vw 0vw  .1vw #f25757,
     .1vw 0vw   2vw #f25757, .2vw 0vw   2vw #f25757, .4vw 0vw   2vw #f25757, 
   
-    .1vw 0vw   1vw #DB222A, .2vw 0vw   1vw #DB222A, .4vw 0vw   5vw #DB222A;
+    .1vw 0vw   1vw var(--MAIN_NEON_RED), .2vw 0vw   1vw var(--MAIN_NEON_RED), .4vw 0vw   5vw var(--MAIN_NEON_RED);
 
     animation: animate 3s infinite alternate;
 }
