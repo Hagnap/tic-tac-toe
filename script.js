@@ -3,6 +3,7 @@ const WINNING_TEXT_COLOR = "#329F5B";
 const NORMAL_TEXT_COLOR = "#07070A";
 
 //DOM ELEMENTS
+const currentPlayerText = document.querySelector("#current-player-text");
 const currentPlayer = document.querySelector("#current-player");
 const currentRound = document.querySelector("#round-number");
 const userInfoFormElement = document.querySelector("#user-info-form");
@@ -63,11 +64,14 @@ const game = (() => {
             p = item.getElementsByTagName("p")[0];
             p.textContent =  player.playerSymbol;
             game.gameBoard[index] = player.playerSymbol;
-            checkForWinner(player);
+            
+            if(!checkForWinner(player)){
+                player = roundCounter % 2 != 0 ? playerOne : playerTwo
+                currentRound.textContent = `Round: ${roundCounter}`;
+                currentPlayer.textContent = player.playerName;   
+            }
 
-            player = roundCounter % 2 != 0 ? playerOne : playerTwo
-            currentRound.textContent = `Round: ${roundCounter}`;
-            currentPlayer.textContent = player.playerName;   
+            
         }
     }
         
@@ -92,15 +96,15 @@ function resetGame() {
     gameData.style.borderBottomLeftRadius  = "5px";
     gameData.style.borderBottomRightRadius  = "5px";
     roundDataElement.style.display = "none";
-
-    isFull = false;
-    playerWon = false;
+    currentPlayerText.style.display = "block";
 }
 
 // Utility Functions
 function displayGame() {
     // Game will ALWAYS start with player one
+    currentPlayer.style.display = "block";
     currentPlayer.textContent = `${playerOne.playerName}`;
+    currentRound.style.display = "block";
     currentRound.textContent = `Round: ${roundCounter}`;
     gameBoardElement.style.display = "grid";
     gameData.style.borderBottomLeftRadius  = "0px";
@@ -265,23 +269,42 @@ function checkForWinner(player) {
                 break; 
             }
         }
-
-        if(isFull) { alert("DRAW"); }
     }
 
 
     if(playerWon) {
-        setTimeout(() => {
-            alert(`${player.playerName} won!`);
+        /*setTimeout(() => {
+            gameOverText.style.display = "block";
+            gameOverText.textContent = `${player.playerName} won!`;
             resetGame();
-        }, 50);    
+        }, 50);    */
+
+        currentPlayer.style.display = "none";
+        currentPlayerText.style.display = "none";
+        //currentRound.style.display = "none";
+        //gameOverText.style.display = "block";
+        currentRound.textContent = `${player.playerName} won!`;
     }
     
     if(isFull) {
-        setTimeout(() => {
-            alert("DRAW!");
+        /*setTimeout(() => {
+            gameOverText.style.display = "block";
+            gameOverText.textContent = "DRAW!";
             resetGame();
-        }, 50);
+        }, 50);*/
+
+        currentPlayer.style.display = "none";
+        currentPlayerText.style.display = "none";
+        //currentRound.style.display = "none";
+        //gameOverText.style.display = "block";
+        currentRound.textContent = "DRAW!";
+    }
+
+    if(isFull || playerWon) {
+        return true;
+    }
+    else {
+        return false;
     }
 }
 

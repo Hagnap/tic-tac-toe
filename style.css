@@ -75,6 +75,10 @@ form {
     border-radius: 5px;
 }
 
+#game-over-text {
+    display: none;
+}
+
 #reset-button {
     margin-bottom: 8px;
 }
