@@ -1,6 +1,4 @@
 let roundCounter = 1;
-playerWon = false;
-isFull = false;
 
 const WINNING_TEXT_COLOR = "#329F5B";
 const NORMAL_TEXT_COLOR = "#07070A";
@@ -23,7 +21,7 @@ const gridItems = document.querySelectorAll(".grid-item");
 gridItems.forEach(item => {
     item.addEventListener("click", (event) => {
         
-        if(playerWon || isFull) {
+        if(game.playerWon || game.isFull) {
             return;
         }
         else {
@@ -55,6 +53,9 @@ const game = (() => {
                         "","",""];
 
 
+
+    let playerWon = false;
+    let isFull = false;
     // Functions
     const updatePosition = (item) => {
 
@@ -109,8 +110,8 @@ function resetGame() {
     gameData.style.borderBottomRightRadius  = "5px";
     roundDataElement.style.display = "none";
     currentPlayerText.style.display = "block";
-    playerWon = false;
-    isFull = false;
+    game.playerWon = false;
+    game.isFull = false;
 }
 
 // Utility Functions
@@ -134,7 +135,7 @@ const playerFactory = (playerName, playerSymbol) => {
 
 function checkForWinner(player) {
 
-    playerWon = false;
+    game.playerWon = false;
     var parElements = document.querySelectorAll('[data-index]>p');
 
     /*
@@ -151,7 +152,7 @@ function checkForWinner(player) {
             parElements[1].style.color = WINNING_TEXT_COLOR;
             parElements[2].style.color = WINNING_TEXT_COLOR;
 
-            playerWon = true;
+            game.playerWon = true;
         }
 
     /*
@@ -168,7 +169,7 @@ function checkForWinner(player) {
             parElements[3].style.color = WINNING_TEXT_COLOR;
             parElements[6].style.color = WINNING_TEXT_COLOR;
 
-            playerWon = true;
+            game.playerWon = true;
         }
        
     /*
@@ -185,7 +186,7 @@ function checkForWinner(player) {
             parElements[5].style.color = WINNING_TEXT_COLOR;
             parElements[8].style.color = WINNING_TEXT_COLOR;
 
-            playerWon = true;
+            game.playerWon = true;
         }
 
     /*
@@ -202,7 +203,7 @@ function checkForWinner(player) {
             parElements[7].style.color = WINNING_TEXT_COLOR;
             parElements[8].style.color = WINNING_TEXT_COLOR;
 
-            playerWon = true;
+            game.playerWon = true;
         }
 
     /*
@@ -219,7 +220,7 @@ function checkForWinner(player) {
             parElements[4].style.color = WINNING_TEXT_COLOR;
             parElements[8].style.color = WINNING_TEXT_COLOR;
 
-            playerWon = true;
+            game.playerWon = true;
         }
 
     /*
@@ -236,7 +237,7 @@ function checkForWinner(player) {
             parElements[4].style.color = WINNING_TEXT_COLOR;
             parElements[6].style.color = WINNING_TEXT_COLOR;
 
-            playerWon = true;
+            game.playerWon = true;
         }
 
     /*
@@ -253,7 +254,7 @@ function checkForWinner(player) {
             parElements[4].style.color = WINNING_TEXT_COLOR;
             parElements[7].style.color = WINNING_TEXT_COLOR;
 
-            playerWon = true;
+            game.playerWon = true;
         }
 
     /*
@@ -270,34 +271,34 @@ function checkForWinner(player) {
             parElements[4].style.color = WINNING_TEXT_COLOR;
             parElements[5].style.color = WINNING_TEXT_COLOR;
 
-            playerWon = true;
+            game.playerWon = true;
     }
 
     // Check for draw
     else {
-        isFull = false;
+        game.isFull = false;
 
         for(let i = 0; i < game.gameBoard.length; i++) {
-            isFull = game.gameBoard[i] === "" ? false : true;
-            if(!isFull) { 
+            game.isFull = game.gameBoard[i] === "" ? false : true;
+            if(!game.isFull) { 
                 break; 
             }
         }
     }
 
-    if(playerWon) {
+    if(game.playerWon) {
         currentPlayer.style.display = "none";
         currentPlayerText.style.display = "none";
         currentRound.textContent = `${player.playerName} won!`;
     }
     
-    if(isFull) {
+    if(game.isFull) {
         currentPlayer.style.display = "none";
         currentPlayerText.style.display = "none";
         currentRound.textContent = "DRAW!";
     }
 
-    if(isFull || playerWon) {
+    if(game.isFull || game.playerWon) {
         return true;
     }
     else {
