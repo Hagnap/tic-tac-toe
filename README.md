@@ -3,7 +3,7 @@
 ## Project Description
 This project is a simple Tic-Tac-Toe game made using CSS, HTML, and JavaScript. The main goal of this project was to have as little global code as possible. Learning about Factories and Modules/Singletons were very helpful for this. This was done via creating a factory for players and a moduel for the game. The game requires two players, they have the option to input names but if they don't they are assigned a default name. Later down the road once I get more familiar with JS I want to implement a min-max algorithm for the AI (along with a simple AI that selects at random). I have implemented a min-max algorithm in Java (for a tic-tac-toe, what a shocker) but that was many years ago so it would be a good refresher and also a good challenege. When it comes to the layout I used both Grid and Flexbox, the more I use these the more I love them. They make life so easy when it comes to creating layouts. When working on this project I wanted to some flare to it, so I added text with a neon lighting and flash effect. I did not come up that myself, I found resources online to help me create them, links to the sources are below. It was a fun challenge combining these two different effects together, in a way it was combining the code of two different people which is something done in the real-world quite a bit. Overall this was another fun project that was a good experience where I got to practice new JS skills and reinforce my CSS and HTML knowledge.
     
-    Sources:
+Sources:
 
     * Neon Lights FX: https://www.youtube.com/watch?v=BDO_xNCw6wU&ab_channel=RedStapler
 
