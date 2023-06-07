@@ -1,6 +1,6 @@
 let roundCounter = 1;
-const WINNING_TEXT_COLOR = "#329F5B";
-const NORMAL_TEXT_COLOR = "#07070A";
+playerWon = false;
+isFull = false;
 
 //DOM ELEMENTS
 const currentPlayerText = document.querySelector("#current-player-text");
@@ -10,6 +10,9 @@ const userInfoFormElement = document.querySelector("#user-info-form");
 const roundDataElement = document.querySelector("#round-data");
 const gameBoardElement = document.querySelector("#game-board");
 const gameData = document.querySelector("#game-data");
+const WINNING_TEXT_COLOR = "#329F5B";
+const NORMAL_TEXT_COLOR = "#07070A";
+
 
 const resetBtn = document.querySelector("#reset-button");
 resetBtn.addEventListener("click", (event) => { resetGame(); })
@@ -17,7 +20,13 @@ resetBtn.addEventListener("click", (event) => { resetGame(); })
 const gridItems = document.querySelectorAll(".grid-item");
 gridItems.forEach(item => {
     item.addEventListener("click", (event) => {
-        game.updatePosition(item);
+        
+        if(playerWon || isFull) {
+            return;
+        }
+        else {
+            game.updatePosition(item);
+        }
     });
 });
 
@@ -38,6 +47,7 @@ const game = (() => {
 
     // Variables
     // This is a 1D array, it stores a flattened vesion of a 3x3 2D array
+    // Easier to access this way. If it wasnt a 3x3, a 2D array might have been better
     const gameBoard =  ["","","",
                         "","","",
                         "","",""];
@@ -97,6 +107,8 @@ function resetGame() {
     gameData.style.borderBottomRightRadius  = "5px";
     roundDataElement.style.display = "none";
     currentPlayerText.style.display = "block";
+    playerWon = false;
+    isFull = false;
 }
 
 // Utility Functions
@@ -120,7 +132,7 @@ const playerFactory = (playerName, playerSymbol) => {
 
 function checkForWinner(player) {
 
-    var playerWon = false;
+    playerWon = false;
     var parElements = document.querySelectorAll('[data-index]>p');
 
     /*
@@ -261,7 +273,7 @@ function checkForWinner(player) {
 
     // Check for draw
     else {
-        var isFull = false;
+        isFull = false;
 
         for(let i = 0; i < game.gameBoard.length; i++) {
             isFull = game.gameBoard[i] === "" ? false : true;
@@ -273,30 +285,14 @@ function checkForWinner(player) {
 
 
     if(playerWon) {
-        /*setTimeout(() => {
-            gameOverText.style.display = "block";
-            gameOverText.textContent = `${player.playerName} won!`;
-            resetGame();
-        }, 50);    */
-
         currentPlayer.style.display = "none";
         currentPlayerText.style.display = "none";
-        //currentRound.style.display = "none";
-        //gameOverText.style.display = "block";
         currentRound.textContent = `${player.playerName} won!`;
     }
     
     if(isFull) {
-        /*setTimeout(() => {
-            gameOverText.style.display = "block";
-            gameOverText.textContent = "DRAW!";
-            resetGame();
-        }, 50);*/
-
         currentPlayer.style.display = "none";
         currentPlayerText.style.display = "none";
-        //currentRound.style.display = "none";
-        //gameOverText.style.display = "block";
         currentRound.textContent = "DRAW!";
     }
 
@@ -309,7 +305,7 @@ function checkForWinner(player) {
 }
 
 
-// Test code
+// Start game with a reset to clear anything that could be on the board & two players
 resetGame();
 let playerOne = playerFactory("", "X");
 let playerTwo = playerFactory("", "O");
