@@ -2,6 +2,9 @@ let roundCounter = 1;
 playerWon = false;
 isFull = false;
 
+const WINNING_TEXT_COLOR = "#329F5B";
+const NORMAL_TEXT_COLOR = "#07070A";
+
 //DOM ELEMENTS
 const currentPlayerText = document.querySelector("#current-player-text");
 const currentPlayer = document.querySelector("#current-player");
@@ -10,8 +13,7 @@ const userInfoFormElement = document.querySelector("#user-info-form");
 const roundDataElement = document.querySelector("#round-data");
 const gameBoardElement = document.querySelector("#game-board");
 const gameData = document.querySelector("#game-data");
-const WINNING_TEXT_COLOR = "#329F5B";
-const NORMAL_TEXT_COLOR = "#07070A";
+
 
 
 const resetBtn = document.querySelector("#reset-button");
@@ -282,7 +284,6 @@ function checkForWinner(player) {
             }
         }
     }
-
 
     if(playerWon) {
         currentPlayer.style.display = "none";
