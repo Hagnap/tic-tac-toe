@@ -11,7 +11,7 @@ Sources:
     
 
 ## Link
-https://jhagg26.github.io/tic-tac-toe/
+https://hagnap.github.io/tic-tac-toe/
 
 
 ## Tech Stack
